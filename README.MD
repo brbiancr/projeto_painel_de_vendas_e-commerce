@@ -36,8 +36,23 @@ Pipeline completo de dados (ingestão → modelagem → dashboard) sobre o datas
 
 ## 📁 Estrutura do repositório
 
+```
 
-
+olist-ecommerce-analytics/
+├── README.md
+├── .gitignore
+├── requirements.txt
+├── notebooks/
+│   └── 01_exploracao_dados.ipynb      ← kagglehub download + exploração inicial
+│
+├── ingestion/
+│
+├── docs/
+│   └── entity_relactionshid_diagram.png                ← diagrama do esquema relacional (inicial)
+│
+└── data/                        
+    ├── raw/
+```
 ---
 
 ## ▶️ Como rodar
