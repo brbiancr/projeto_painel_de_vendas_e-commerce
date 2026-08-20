@@ -46,8 +46,9 @@ olist-ecommerce-analytics/
 ├── notebooks/
 │   └── 01_exploracao_dados.ipynb      ← kagglehub download + exploração inicial
 │
-├── ingestion/
-|   └── download_data.py    ← kagglehub → converte CSV para Parquet, salva em raw/
+├── scripts/
+|   ├── script_raw.py       ← kagglehub → converte CSV para Parquet, salva em raw/
+|   └── script_trusted.py       ← limpeza e tratamento dos dados 
 │
 ├── docs/
 │   └── entity_relactionshid_diagram.png                ← diagrama do esquema relacional (inicial)
