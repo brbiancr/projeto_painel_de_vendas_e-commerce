@@ -1,0 +1,16 @@
+version: 2
+
+models:
+  - name: stg_orders
+    description: "Pedidos limpos da camada trusted"
+    columns:
+      - name: order_id
+        description: "Chave primária do pedido"
+        tests:
+          - unique     # Valida se NÃO há duplicatas de ID
+          - not_null   # Valida se NÃO há IDs vazios
+
+      - name: order_status
+        description: "Status do pedido"
+        tests:
+          - not_null
