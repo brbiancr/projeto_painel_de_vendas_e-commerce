@@ -10,7 +10,75 @@ models:
           - unique     # Valida se NÃO há duplicatas de ID
           - not_null   # Valida se NÃO há IDs vazios
 
-      - name: order_status
-        description: "Status do pedido"
+      - name: customer_id
+        description: "Chave estrangeira do cliente"
         tests:
           - not_null
+
+  - name: stg_customers
+    description: "Clientes limpos da camada trusted"
+    columns:
+      - name: customer_id
+        description: "Chave primária do cliente"
+        tests:
+          - unique
+          - not_null
+
+      - name: customer_unique_id
+        description: "Chave única do cliente"
+        tests:
+          - not_null
+
+  - name: stg_order_items
+    description: "Itens do pedido limpos da camada trusted"
+    columns:
+      - name: order_id
+        description: "Chave estrangeira do pedido"
+        tests:
+          - not_null
+
+      - name: order_item_id
+        description: "Chave primária do item do pedido"
+        tests:
+          - not_null
+
+      - name: product_id
+        description: "Chave estrangeira do produto"
+        tests:
+          - not_null
+
+      - name: seller_id
+        description: "Chave estrangeira do vendedor"
+        tests:
+          - not_null
+
+  - name: stg_order_payments
+    description: "Pagamentos do pedido limpos da camada trusted"
+    columns:
+      - name: order_id
+        description: "Chave estrangeira do pedido"
+        tests:
+          - not_null
+  
+  - name: stg_order_reviews
+    description: "Avaliações do pedido limpos da camada trusted"
+    columns:
+      - name: review_id
+        description: "Chave primária da avaliação"
+        tests:
+          - not_null
+          - unique
+
+      - name: order_id
+        description: "Chave estrangeira do pedido"
+        tests:
+          - not_null
+
+  - name: stg_products
+    description: "Produtos limpos da camada trusted"
+    columns:
+      - name: product_id
+        description: "Chave primária do produto"
+        tests:
+          - not_null
+          - unique
