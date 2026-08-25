@@ -55,7 +55,8 @@ olist-ecommerce-analytics/
 |   └── script_trusted.py       ← limpeza e tratamento dos dados 
 │
 ├── docs/
-│   └── entity_relactionshid_diagram.png                ← diagrama do esquema relacional (inicial)
+│   ├── entity_relactionshid_diagram.png                ← diagrama do esquema relacional (inicial)
+|   └── star_schema_diagram         ← diagrama do modelo estrela
 │
 ├── models/ staging
 │   └── schema.yml
@@ -63,7 +64,8 @@ olist-ecommerce-analytics/
 └── data/                        
     ├── raw/
     ├── trusted/
-    └── refined/
+    ├── refined/
+    └── duckdb/
 ```
 ---
 
