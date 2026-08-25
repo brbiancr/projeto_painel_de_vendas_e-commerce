@@ -1,6 +1,6 @@
 with source as (
     -- DuckDB lê o arquivo Parquet diretamente
-    select * from read_parquet('../data\trusted\trusted_order_reviews_dataset.parquet')
+    select * from read_parquet('data/trusted\trusted_order_reviews_dataset.parquet')
 )
 
 select
