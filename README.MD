@@ -12,7 +12,7 @@ Pipeline completo de dados (ingestão → modelagem → dashboard) sobre o datas
 |---|---|
 | Exploração dos dados | ✅ |
 | Ingestão (Python) | ✅ |
-| Modelagem staging (dbt) | ⬜ |
+| Modelagem staging (dbt) | ✅ |
 | Modelagem star schema (dbt) | ⬜ |
 | Conexão e modelo no Power BI | ⬜ |
 | Medidas DAX | ⬜ |
@@ -24,7 +24,9 @@ Pipeline completo de dados (ingestão → modelagem → dashboard) sobre o datas
 ## 🛠️ Tecnologias utilizadas
 
 - **Python** — ingestão e limpeza de dados
-- **kagglehub** — download do dataset
+- **kagglehub** — download do 
+- **DuckBD** - datawarehouse local
+- **dbt-core** - transformação e modelagem dimensional
 
 
 ---
@@ -44,7 +46,9 @@ olist-ecommerce-analytics/
 ├── requirements.txt
 |
 ├── notebooks/
-│   └── 01_exploracao_dados.ipynb      ← kagglehub download + exploração inicial
+│   ├── 01_raw.ipynb      ← kagglehub download + exploração inicial
+|   ├── 02_trusted
+|   └── 03_duckdb_test.ipynb
 │
 ├── scripts/
 |   ├── script_raw.py       ← kagglehub → converte CSV para Parquet, salva em raw/
@@ -53,6 +57,9 @@ olist-ecommerce-analytics/
 ├── docs/
 │   └── entity_relactionshid_diagram.png                ← diagrama do esquema relacional (inicial)
 │
+├── models/ staging
+│   └── schema.yml
+|
 └── data/                        
     ├── raw/
     ├── trusted/
@@ -61,32 +68,5 @@ olist-ecommerce-analytics/
 ---
 
 ## ▶️ Como rodar
-
-
-
----
-
-## 📝 Etapas de execução
-
-
-
-### Dia 1 — Exploração
-
-
-
-## 🧠 Anotações e aprendizados
-
-
-### Dificuldades encontradas
--
-
-### Decisões técnicas e por quê
--
-
-### Pontos de atenção / coisas que faria diferente
--
-
-### Conceitos que precisei estudar mais a fundo
--
 
 ---
