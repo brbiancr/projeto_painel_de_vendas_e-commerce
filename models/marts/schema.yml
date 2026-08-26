@@ -1,0 +1,133 @@
+version: 2
+
+models:
+  - name: fact_order
+    description: "Tabela fato de pedidos — granularidade de item de pedido"
+    columns:
+      - name: order_key
+        description: "Parte da chave composta (PK, FK) — repete por pedido com múltiplos itens"
+        tests:
+          - not_null
+
+      - name: order_item_id
+        description: "Parte da chave composta (PK) — posição do item dentro do pedido"
+        tests:
+          - not_null
+
+      - name: customer_key
+        description: "Chave estrangeira do cliente"
+        tests:
+          - not_null
+          - relationships:
+              to: ref('dim_customer')
+              field: customer_key
+
+      - name: product_key
+        description: "Chave estrangeira do produto"
+        tests:
+          - not_null
+          - relationships:
+              to: ref('dim_product')
+              field: product_key
+
+      - name: seller_key
+        description: "Chave estrangeira do vendedor"
+        tests:
+          - not_null
+          - relationships:
+              to: ref('dim_seller')
+              field: seller_key
+
+      - name: date_key_order
+        description: "Chave estrangeira da data do pedido (role-playing dim_date)"
+        tests:
+          - not_null
+          - relationships:
+              to: ref('dim_date')
+              field: date_key
+
+      - name: date_key_entrega
+        description: "Chave estrangeira da data de entrega (role-playing dim_date)"
+        tests:
+          - not_null
+          - relationships:
+              to: ref('dim_date')
+              field: date_key
+
+      - name: status_key
+        description: "Chave estrangeira do status do pedido"
+        tests:
+          - not_null
+          - relationships:
+              to: ref('dim_order_status')
+              field: status_key
+
+  - name: fact_payment
+    description: "Tabela fato de pagamentos — granularidade de pagamento (pedido pode ter mais de um)"
+    columns:
+      - name: order_key
+        description: "Parte da chave composta (PK, FK) — repete por pedido com múltiplos pagamentos"
+        tests:
+          - not_null
+          - relationships:
+              to: ref('dim_order')
+              field: order_key
+
+      - name: payment_sequential
+        description: "Parte da chave composta (PK) — ordem do pagamento dentro do pedido"
+        tests:
+          - not_null
+
+  - name: dim_order
+    description: "Dimensão de degeneração — conecta fact_order e fact_payment"
+    columns:
+      - name: order_key
+        description: "Chave primária do pedido"
+        tests:
+          - unique
+          - not_null
+
+  - name: dim_customer
+    description: "Tabela dimensão de clientes"
+    columns:
+      - name: customer_key
+        description: "Chave primária do cliente"
+        tests:
+          - unique
+          - not_null
+
+  - name: dim_order_status
+    description: "Tabela dimensão de status de pedidos"
+    columns:
+      - name: status_key
+        description: "Chave primária do status"
+        tests:
+          - unique
+          - not_null
+
+  - name: dim_product
+    description: "Tabela dimensão de produtos"
+    columns:
+      - name: product_key
+        description: "Chave primária do produto"
+        tests:
+          - unique
+          - not_null
+
+  - name: dim_seller
+    description: "Tabela dimensão de vendedores"
+    columns:
+      - name: seller_key
+        description: "Chave primária do vendedor"
+        tests:
+          - unique
+          - not_null
+
+  - name: dim_date
+    description: "Tabela dimensão de datas"
+    columns:
+      - name: date_key
+        description: "Chave primária da data"
+        tests:
+          - unique
+          - not_null
