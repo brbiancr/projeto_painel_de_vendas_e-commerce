@@ -70,5 +70,16 @@ olist-ecommerce-analytics/
 ---
 
 ## ▶️ Como rodar
+```
+# 1. Ambiente
+python -m venv venv
+source venv/bin/activate
+python -m pip install -r requirements.txt
 
+# 2. Ingestão
+python script/script_raw.py
+
+# 3. Transformação
+python script/script_trusted.py
+```
 ---
