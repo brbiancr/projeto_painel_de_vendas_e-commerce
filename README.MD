@@ -58,8 +58,9 @@ olist-ecommerce-analytics/
 │   ├── entity_relactionshid_diagram.png                ← diagrama do esquema relacional (inicial)
 |   └── star_schema_diagram         ← diagrama do modelo estrela
 │
-├── models/ staging
-│   └── schema.yml
+├── models/
+|   ├──staging/
+│   └── marts/
 |
 └── data/                        
     ├── raw/
@@ -81,5 +82,10 @@ python script/script_raw.py
 
 # 3. Transformação
 python script/script_trusted.py
+
+# 4. DBT
+dbt debug --profiles-dir .  
+dbt run --profiles-dir .  
+dbt test --profiles-dir .
 ```
 ---
