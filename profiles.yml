@@ -1,0 +1,7 @@
+olist_analytics:
+  target: dev
+  outputs:
+    dev:
+      type: duckdb
+      path: "data/duckdb/olist.duckdb" # O banco de dados local que o DuckDB criará
+      threads: 4
