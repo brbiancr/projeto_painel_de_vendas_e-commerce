@@ -21,8 +21,8 @@ calendar as (
 )
 
 select
-    -- PK da dimensão de data no formato inteiro YYYYMMDD (ex: 20180105)
-    cast(strftime(complete_date, '%Y%m%d') as integer) as date_key,
+    -- PK da dimensão de data no formato inteiro DD/MM/YYYY (ex: 20180105)
+    cast(strftime(complete_date, '%d/%m/%Y') as varchar) as date_key,
     
     complete_date,
     extract(year from complete_date)::integer as year,

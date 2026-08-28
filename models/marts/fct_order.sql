@@ -25,13 +25,13 @@ select
     md5(cast(i.product_id as varchar)) as product_key,
     md5(cast(i.seller_id as varchar)) as seller_key,
     
-    -- FK para dim_date (Data da compra no formato YYYYMMDD)
-    cast(strftime(cast(o.order_purchase_timestamp as date), '%Y%m%d') as integer) as date_key_order,
+    -- FK para dim_date (Data da compra no formato DD/MM/YYYY)
+    cast(strftime(cast(o.order_purchase_timestamp as date), '%d/%m/%Y') as varchar) as date_key_order,
     
-    -- FK para dim_date (Data da entrega no formato YYYYMMDD, null se ainda não entregue)
+    -- FK para dim_date (Data da entrega no formato DD/MM/YYYY, null se ainda não entregue)
     case 
         when o.order_delivered_customer_date is not null 
-        then cast(strftime(cast(o.order_delivered_customer_date as date), '%Y%m%d') as integer)
+        then cast(strftime(cast(o.order_delivered_customer_date as date), '%d/%m/%Y') as varchar)
         else null 
     end as date_key_entrega,
 
