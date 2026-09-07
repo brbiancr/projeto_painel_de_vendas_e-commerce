@@ -6,18 +6,18 @@ Pipeline completo de dados (ingestão → modelagem → dashboard) sobre o datas
 
 ## 🚦 Status do projeto
 
-`Em andamento` 
+`Finalizado` 
 
 | Etapa | Status |
 |---|---|
 | Exploração dos dados | ✅ |
 | Ingestão (Python) | ✅ |
 | Modelagem staging (dbt) | ✅ |
-| Modelagem star schema (dbt) | ⬜ |
-| Conexão e modelo no Power BI | ⬜ |
-| Medidas DAX | ⬜ |
-| Dashboard final | ⬜ |
-| README e documentação finalizados | ⬜ |
+| Modelagem star schema (dbt) | ✅ |
+| Conexão e modelo no Power BI | ✅ |
+| Medidas DAX | ✅ |
+| Dashboard final | ✅ |
+| README e documentação finalizados | ✅ |
 
 ---
 
@@ -27,12 +27,27 @@ Pipeline completo de dados (ingestão → modelagem → dashboard) sobre o datas
 - **kagglehub** — download do 
 - **DuckBD** - datawarehouse local
 - **dbt-core** - transformação e modelagem dimensional
+- **Power BI Desktop** — dashboard e medidas DAX
 
 
 ---
 
 ## 🏗️ Arquitetura
-
+```
+Kaggle (Olist dataset)
+        │
+        ▼
+  Ingestão (Python) ──► Parquet (raw)
+        │
+        ▼
+     dbt staging ──► dbt marts (star schema)
+        │
+        ▼
+      DuckDB (warehouse)
+        │
+        ▼
+   Power BI (modelo + DAX)
+```
 
 ---
 
@@ -45,21 +60,19 @@ olist-ecommerce-analytics/
 ├── .gitignore
 ├── requirements.txt
 |
-├── notebooks/
-│   ├── 01_raw.ipynb      ← kagglehub download + exploração inicial
-|   ├── 02_trusted
-|   └── 03_duckdb_test.ipynb
+├── notebooks/      ← testes
 │
 ├── scripts/
 |   ├── script_raw.py       ← kagglehub → converte CSV para Parquet, salva em raw/
-|   └── script_trusted.py       ← limpeza e tratamento dos dados 
+|   ├── script_trusted.py       ← limpeza e tratamento dos dados 
+|   └── script_refined.py       ← modelo estrela
 │
 ├── docs/
 │   ├── entity_relactionshid_diagram.png                ← diagrama do esquema relacional (inicial)
 |   └── star_schema_diagram         ← diagrama do modelo estrela
 │
 ├── models/
-|   ├──staging/
+|   ├── staging/
 │   └── marts/
 |
 └── data/                        
